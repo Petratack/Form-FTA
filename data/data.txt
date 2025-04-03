@@ -1,0 +1,5 @@
+Nome: Mario, Cognome: Rossi, Azienda: FTA sistemi, Email: MarioRossi@gmail.com, Documento visto: ACCETTA, Data: 2025-04-03, Ora: 10:48
+Nome: Sefano, Cognome: Bianchi, Azienda: Carrefur SPA, Email: Stefanoblancs@libero.it, Documento visto: , Data: 2025-04-03, Ora: 10:50
+Nome: Maria, Cognome: Visini, Azienda: Bennet , Email: MariaVS@mail.com, Documento visto: ACCETTA, Data: 2025-04-03, Ora: 10:51
+Nome: Maria, Cognome: Visini, Azienda: Bennet , Email: MariaVS@mail.com, Documento visto: ACCETTA, Data: 2025-04-03, Ora: 11:06
+Nome: Carrefur, Cognome: SPA, Azienda: Carrefur SPA, Email: Stefanoblancs@libero.it, Documento visto: , Data: 2025-04-03, Ora: 11:07
