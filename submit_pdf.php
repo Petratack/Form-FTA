@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
-require 'FPDF\doc/fpdf.php'; 
+require 'FPDF/doc/fpdf.php'; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'] ?? '';
@@ -22,10 +22,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $visioneDocumento = "NON ACCETTA";
     }
     
-    $fp = fopen('data/data.txt', 'a');
-    $contenuto = "Nome: $nome, Cognome: $cognome, Azienda: $azienda, Email: $email, Documento visto: $visioneDocumento, Data: $data, Ora: $ora\n";
-    fwrite($fp, $contenuto);
-    fclose($fp);
+    $conn= new mysql("localhost", "ubuntu", "ubuntu", "form_db");
+
+    if($conn->connect_error){
+        die("connessione fallita: " . $conn->connect_error);
+    }  
+
+    $stmt = $mysql->prepare("INSERT INTO form_data (nome, cognome, email, azienda, data_invio, ora_invio, accettato_privacy) VALUES (?,?,?,?,?,?,?)");
+    $stmt-> blind_param("sssssssi", $nome, $cognome, $email, $azienda, $data, $ora, $privacy);
+
+    if($stmt->execute){
+        echo"Dati salvati nel database con successo";
+    }else{
+        echo "Errore: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $mysql->close();
+
+
+
+
+
+
+
+
 
    
     $pdf = new FPDF();
