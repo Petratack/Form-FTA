@@ -1,6 +1,5 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;use PHPMailer\PHPMailer\Exception;
 
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
@@ -22,23 +21,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $visioneDocumento = "NON ACCETTA";
     }
     
-    $conn= new mysql("localhost", "ubuntu", "ubuntu", "form_db");
+    $conn= new mysqli("localhost", "mysql_user", "password", "form_db"); //form_db
 
     if($conn->connect_error){
         die("connessione fallita: " . $conn->connect_error);
     }  
 
-    $stmt = $mysql->prepare("INSERT INTO form_data (nome, cognome, email, azienda, data_invio, ora_invio, accettato_privacy) VALUES (?,?,?,?,?,?,?)");
-    $stmt-> blind_param("sssssssi", $nome, $cognome, $email, $azienda, $data, $ora, $privacy);
+    $stmt = $conn->prepare("INSERT INTO form_data (nome, cognome, email, azienda, data_invio, ora_invio, visioneDocumento) VALUES (?,?,?,?,?,?,?)");
+    //$stmt = $conn->prepare("INSERT INTO form_data (nome, cognome, email, azienda, data_invio, ora_invio, accettato_privacy) VALUES ($nome, $cognome, $email, $azienda, $data, $ora, 1)");
+    
+    //$accettato= $privacy === 'Accettata' ? 1: 0;
+    $stmt-> bind_param("sssssss", $nome, $cognome, $email, $azienda, $data, $ora, $visioneDocumento);
 
-    if($stmt->execute){
+    if($stmt->execute()){
         echo"Dati salvati nel database con successo";
     }else{
         echo "Errore: " . $stmt->error;
     }
 
     $stmt->close();
-    $mysql->close();
+    $conn->close();
 
 
 
@@ -54,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pdf->SetFont('Arial', 'B', 16);
     $pdf->Cell(40, 10, 'Modulo Accettazione al Documento per la Privacy');
     $pdf->Ln(50);
-    $pdf->Image('img\FTA_colore-1-1024x731.png', 20,20,-400,-400);
+    $pdf->Image('img/FTA_colore-1-1024x731.png', 20,20,-400,-400);
     $pdf->Ln(0);
     $pdf->SetFont('Arial', 'B', 7);
     $pdf->Cell(0,5,"FTA SISTEMI SRL VIA CUSSIGNACCO 78/16 - 33040 Pradamano (UD).");
@@ -74,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pdf->Cell(0, 15 ,"Firma Datore___________________________ " );
     
     $pdfFile = 'data/modulo_inviato.pdf';
-    $pdf->Output('F', $pdfFile);
+    $pdf->Output('F', 'data/modulo_inviato.pdf');
 
    
     $mail = new PHPMailer(true);
@@ -97,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         
         $mail->setFrom($email, "$nome $cognome");
-        $mail->addAddress('patrick.galante9823@gmail.com'); 
+        $mail->addAddress('patrick.galante@studenti.malignani.ud.it'); 
 
         $mail->isHTML(true);
         $mail->Subject = "Nuova registrazione da $nome $cognome";
@@ -120,10 +122,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </body>
             </html>
             <?php
+
+
     } catch (Exception $e) {
         echo "Errore nell'invio: {$mail->ErrorInfo}";
     }
 } else {
     echo "Accesso non autorizzato.";
 }
+
+
+$redirect_time = 5; 
+$redirect_url = 'Form.php'; 
+
+echo "<meta http-equiv='refresh' content='$redirect_time;url=$redirect_url'>";
+
+
+
 ?>
