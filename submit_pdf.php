@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pdf->SetFont('Arial', 'B', 16);
     $pdf->Cell(40, 10, 'Modulo Accettazione al Documento per la Privacy');
     $pdf->Ln(50);
-    $pdf->Image('img/FTA_colore-1-1024x731.png', 20,20,-400,-400);
+    $pdf->Image('company.logo.png', 20,20,-400,-400);
     $pdf->Ln(0);
     $pdf->SetFont('Arial', 'B', 7);
     $pdf->Cell(0,5,"FTA SISTEMI SRL VIA CUSSIGNACCO 78/16 - 33040 Pradamano (UD).");
