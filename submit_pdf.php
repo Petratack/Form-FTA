@@ -84,8 +84,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'patrickgalante25@gmail.com'; 
-        $mail->Password   = 'mcvk ihuu ylze yxdi';           
+        $mail->Username   = 'sender@email.com'; 
+        $mail->Password   = 'sender password';           
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
 
@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         
         $mail->setFrom($email, "$nome $cognome");
-        $mail->addAddress('patrick.galante@studenti.malignani.ud.it'); 
+        $mail->addAddress('recipient@email.com'); 
 
         $mail->isHTML(true);
         $mail->Subject = "Nuova registrazione da $nome $cognome";
