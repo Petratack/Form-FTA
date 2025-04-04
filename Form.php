@@ -10,14 +10,13 @@
     <h2>MODULO DI REGISTRAZIONE</h2>
     
   
-    <a href="https://www.ftasistemi.com/" target="_blank">
-      <img src="https://www.ftasistemi.com/wp/wp-content/uploads/2020/04/FTA_colore-1-1024x731.png" alt="FTA" class="responsive-img center">
+    <a href="companiy.site.com" target="_blank">
+      <img src="company.logo.png" alt="FTA" class="responsive-img center">
     </a>
 
     
     <h6 class="subtitle">
-      FTA SISTEMI SRL
-      VIA CUSSIGNACCO 78/16 - 33040 Pradamano (UD)·
+      Company address & info
     </h6>
           
     <form id="registationForm" action="submit_pdf.php" method="post">
@@ -54,7 +53,7 @@
       
       ?>
       <div class="documentLink">
-        <a href="https://sagrini.it/wp-content/uploads/2018/07/4.-Privacy-.pdf" id="documentLink" target="_blank" style="font-size: 30px; text-decoration:underline;" onclick=<?php $documentViewed= true; ?> cursor>CLICCA QUI</a>
+        <a href="document.pdf" id="documentLink" target="_blank" style="font-size: 30px; text-decoration:underline;" onclick=<?php $documentViewed= true; ?> cursor>CLICCA QUI</a>
         <h6 style="text-align: center;">(Leggi il documento prima di inviare)</h6>
       </div>
       
